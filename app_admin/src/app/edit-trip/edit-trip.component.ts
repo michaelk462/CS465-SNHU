@@ -14,7 +14,7 @@ import { Trip } from '../models/trip';
   styleUrl: './edit-trip.component.css'
 })
 
-export class EditTripComponent {
+export class EditTripComponent implements OnInit {
   public editForm!: FormGroup;
   trip!: Trip;
   submitted = false;
@@ -50,7 +50,7 @@ export class EditTripComponent {
       description: ['', Validators.required]
     })
 
-    this.tripDataService['getTrip'](tripCode)
+    this.tripDataService.getTrip(tripCode)
       .subscribe({
         next: (value: any) => {
           this.trip = value;
@@ -65,7 +65,9 @@ export class EditTripComponent {
           console.log(this.message);
         },
         error: (error: any) => {
-          console.log('Error: ' + error);
+          console.log('Error status: ' + error.status);
+          console.log('Error message:', error.message);
+          console.log('Full error:', error);
         }
       })
   }
@@ -91,7 +93,7 @@ export class EditTripComponent {
   }
 
   onBack(): void {
-    this.router.navigate(['edit-trip']);
+    this.router.navigate(['']);
   }
 
 

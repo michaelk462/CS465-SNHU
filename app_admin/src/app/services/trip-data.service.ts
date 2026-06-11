@@ -9,16 +9,24 @@ import { Trip } from '../models/trip';
 })
 
 export class TripDataService {
-    [x: string]: any;
-    tripDataService(value: any) {
-      throw new Error('Method not implemented.');
+
+    private url = 'http://localhost:3000/api';
+
+    constructor(private http: HttpClient) { }
+
+    getTrips(): Observable<Trip[]> {
+        return this.http.get<Trip[]>(`${this.url}/trips`);
     }
-    
-    constructor(private http: HttpClient) {}
 
-    getTrips() : Observable<Trip[]> {
-        let url = 'http://localhost:3000/api/trips';
+    addTrip(formData: Trip): Observable<Trip[]> {
+        return this.http.post<Trip[]>(`${this.url}/trips`, formData);
+    }
 
-        return this.http.get<Trip[]>(url)
+    getTrip(tripCode: string): Observable<Trip[]> {
+        return this.http.get<Trip[]>(`${this.url}/trips/${tripCode}`);
+    }
+
+    updateTrip(formData: Trip): Observable<Trip[]> {
+        return this.http.put<Trip[]>(`${this.url}/trips/${formData.code}`, formData);
     }
 }

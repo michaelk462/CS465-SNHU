@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrl: './trip-listing.component.css',
 })
 
-export class TripListingComponent implements OnInit {
+export class TripListingComponent implements OnInit{
   trips!: Trip[];
   message: string = '';
 
@@ -27,7 +27,7 @@ export class TripListingComponent implements OnInit {
   }
 
   public addTrip(): void {
-    this.router.navigate(['add-trip']);
+    this.router.navigate([this.addTrip]);
   }
 
   private getStuff(): void {
@@ -44,9 +44,9 @@ export class TripListingComponent implements OnInit {
         }
         console.log(this.message);
       },
-      error: (error: any) => {
-        console.log('Error: ' + error);
-      }
+        error: (error: any) => {
+          console.log('Error: ', error);
+        }
     })
   }
 
