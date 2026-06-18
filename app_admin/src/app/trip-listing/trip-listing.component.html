@@ -8,3 +8,7 @@
         <app-trip-card [trip]="trip" class="card-deck mt-2"></app-trip-card>
     </div>
 </div>
+
+<div *ngIf="isLoggedIn()">
+    <button (click)="addTrip()" class="btn btn-primary mb-3">Add Trip</button>
+</div>
